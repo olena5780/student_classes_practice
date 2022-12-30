@@ -1,6 +1,8 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Test {
     public static void main(String[] args) {
-
 
         //COMPLETE THIS CLASS AFTER ALL THE OTHER CLASSES
 
@@ -23,5 +25,76 @@ public class Test {
         Print how many students are MathStudent with message -> "Math students = {numberOfMathStudents}"
         Print how many students are ScienceStudent with message -> "Science students = {numberOfScienceStudents}"
          */
+
+        int students = 0;
+        int countMathStudents = 0;
+        int countScienceStudents = 0;
+
+        ArrayList<Student> listOfStudents = new ArrayList();
+
+        while (students < 3) {
+            System.out.println(UserQuestions.askToJoin);
+
+            Scanner input = new Scanner(System.in);
+            String ans = input.nextLine();
+
+            if (ans.toLowerCase().contains("y"))
+                System.out.println(UserQuestions.askFirstName);
+                String firstName = input.nextLine();
+                System.out.println(UserQuestions.askLastName);
+                String lastName = input.nextLine();
+                System.out.println(UserQuestions.askAge);
+                int age = input.nextInt();
+                input.nextLine();
+                try {
+                    if (age <= 20) throw new RuntimeException(age + " is not allowed!");
+                } catch (RuntimeException c) {
+                    c.printStackTrace();
+                    input.nextLine();
+                    continue;
+                }
+                System.out.println(UserQuestions.askGender);
+                String gender = input.nextLine();
+                System.out.println(UserQuestions.askClassName);
+                String className = input.nextLine();
+
+                try {
+                    if (!className.equalsIgnoreCase("Math") && !className.equalsIgnoreCase("Science"))
+                        throw new RuntimeException(className + " is not allowed!");
+                } catch (RuntimeException c) {
+                    c.printStackTrace();
+                    continue;
+                }
+
+                if (className.toLowerCase().contains("math")) {
+                    MathStudent mathStudent = new MathStudent(firstName, lastName, age, gender, className);
+                    listOfStudents.add(mathStudent);
+                    countMathStudents++;
+                    students++;
+                } else {
+                    ScienceStudent scienceStudent = new ScienceStudent(firstName, lastName, age, gender, className);
+                    listOfStudents.add(scienceStudent);
+                    countScienceStudents++;
+                    students++;
+
+                }
+            }
+
+
+            for (Student s : listOfStudents) {
+                System.out.println(s);
+            }
+
+            System.out.println("Math students = " + countMathStudents);
+            System.out.println("Science students = " + countScienceStudents);
+
+
+        }
     }
-}
+
+
+
+
+
+
+
