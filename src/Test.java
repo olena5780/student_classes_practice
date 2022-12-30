@@ -47,7 +47,7 @@ public class Test {
                 int age = input.nextInt();
                 input.nextLine();
                 try {
-                    if (age <= 20) throw new RuntimeException(age + " is not allowed!");
+                    Permission.checkAge(age);
                 } catch (RuntimeException c) {
                     c.printStackTrace();
                     input.nextLine();
@@ -59,8 +59,7 @@ public class Test {
                 String className = input.nextLine();
 
                 try {
-                    if (!className.equalsIgnoreCase("Math") && !className.equalsIgnoreCase("Science"))
-                        throw new RuntimeException(className + " is not allowed!");
+                    Permission.checkClassName(className);
                 } catch (RuntimeException c) {
                     c.printStackTrace();
                     continue;
